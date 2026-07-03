@@ -1,0 +1,14 @@
+{
+  "name": "laro-tayo",
+  "private": true,
+  "description": "Party games on your phone — tailored for Filipinos",
+  "workspaces": ["apps/*", "packages/*"],
+  "scripts": {
+    "lint": "echo \"No packages yet — see docs/IMPLEMENTATION_PLAN.md\"",
+    "test": "echo \"No tests yet\""
+  },
+  "engines": {
+    "node": ">=20"
+  },
+  "license": "MIT"
+}
