@@ -6,7 +6,7 @@ Org-wide agent defaults: see [room-tba/AGENTS.md](https://github.com/uplbtools/r
 
 ## Status
 
-**Planning repo — no `apps/*` packages yet.** Jackbox-style party games with **Taglish-ready** copy. Read the implementation plan before scaffolding realtime code.
+**Planning repo: no `apps/*` packages yet.** Jackbox-style party games with **Taglish-ready** copy. Read the implementation plan before scaffolding realtime code.
 
 ## Doc map
 
@@ -14,11 +14,11 @@ Org-wide agent defaults: see [room-tba/AGENTS.md](https://github.com/uplbtools/r
 | --- | --- |
 | Game modes, architecture options | [docs/IMPLEMENTATION_PLAN.md](docs/IMPLEMENTATION_PLAN.md) |
 
-## Planned stack (target — not all implemented)
+## Planned stack (target: not all implemented)
 
 - **Monorepo:** npm workspaces
-- **UI:** Svelte 5 — separate **host** (TV/laptop) and **player** (phone) surfaces
-- **Realtime:** Cloudflare **Durable Objects** (preferred) or PartyKit — WebSocket room state
+- **UI:** Svelte 5: separate **host** (TV/laptop) and **player** (phone) surfaces
+- **Realtime:** Cloudflare **Durable Objects** (preferred) or PartyKit: WebSocket room state
 - **Deploy:** Vercel (static/SSR UI) + Cloudflare Workers (game rooms)
 - **Join flow:** No-install PWA / QR code into room code
 
@@ -31,9 +31,9 @@ Borrow **Room TBA** UX rules: calm UI, no decorative animations, 320px-first pla
 
 ## Realtime rules (when implemented)
 
-- **One room code = one authoritative DO/PartyKit room** — no split-brain host state
+- **One room code = one authoritative DO/PartyKit room**: no split-brain host state
 - Reconnecting players restore nickname + score from server state
-- Host disconnect should prompt transfer or graceful end — never silent stale lobby
+- Host disconnect should prompt transfer or graceful end: never silent stale lobby
 - Latency target: playable on typical PH mobile LTE; minimize chatty round-trips
 
 ## Verify before done (when code exists)
@@ -47,7 +47,7 @@ Borrow **Room TBA** UX rules: calm UI, no decorative animations, 320px-first pla
 ## How to work
 
 - **Bias toward action** on vertical slices (one mini-game end-to-end) rather than broad scaffolding
-- **Do not defer** websocket protocol docs — update plan when message shapes change
+- **Do not defer** websocket protocol docs: update plan when message shapes change
 - **`gh` by default** for issues and PRs
 
 ## Commits
@@ -56,5 +56,5 @@ Borrow **Room TBA** UX rules: calm UI, no decorative animations, 320px-first pla
 
 ## Security
 
-- Room codes are unlisted secrets — no public room enumeration API
+- Room codes are unlisted secrets: no public room enumeration API
 - Sanitize player display names before broadcast to other clients

@@ -1,7 +1,7 @@
 # Implementation plan (tentative)
 
-**Last updated:** 2026-07-03  
-**Status:** draft — expect rewrites after a playable vertical slice.
+**Last updated:** 2026-07-03 
+**Status:** draft: expect rewrites after a playable vertical slice.
 
 This document captures an initial technical and product plan for **Laro Tayo**: phone-based party games with Filipino cultural tailoring. Nothing here is locked.
 
@@ -33,11 +33,11 @@ This document captures an initial technical and product plan for **Laro Tayo**: 
 
 ## 2. Product principles
 
-1. **Phone is the controller** — host display is read-only except host controls (next, skip, settings).
-2. **Filipino flavor in content, not gatekeeping** — diaspora friends can play; packs can mix Tagalog, English, and Taglish.
-3. **Humor over competitiveness** — scoring exists but roasts and reveal animations matter more than esports balance.
-4. **Offline-tolerant UX** — show clear "reconnecting…" states; never silently drop a submitted answer.
-5. **No install** — PWA optional later; MVP is HTTPS website.
+1. **Phone is the controller**: host display is read-only except host controls (next, skip, settings).
+2. **Filipino flavor in content, not gatekeeping**: diaspora friends can play; packs can mix Tagalog, English, and Taglish.
+3. **Humor over competitiveness**: scoring exists but roasts and reveal animations matter more than esports balance.
+4. **Offline-tolerant UX**: show clear "reconnecting…" states; never silently drop a submitted answer.
+5. **No install**: PWA optional later; MVP is HTTPS website.
 
 ---
 
@@ -69,11 +69,11 @@ flowchart LR
 | **Host UI** | QR + room code, round prompts, timers, scoreboard | Svelte 5 or React; static + SSR shell |
 | **Player UI** | Join flow, input controls (text, tap, draw canvas) | Same codebase, responsive routes |
 | **Realtime** | Room membership, broadcast events, authoritative round state | Cloudflare Durable Objects, PartyKit, or Socket.io on Fly |
-| **Game engine** | Pure TS: phases, validation, scoring | `packages/game-core` — unit tested, no DOM |
+| **Game engine** | Pure TS: phases, validation, scoring | `packages/game-core`: unit tested, no DOM |
 | **Prompts** | Versioned JSON packs with locale tags | `packages/prompts` |
 | **Deploy** | Preview per PR | Vercel (UI) + Cloudflare Workers (WS) *or* single CF Pages + DO |
 
-**Recommendation for slice #1:** Cloudflare **Durable Objects** + **SvelteKit** on Cloudflare Pages — one vendor, good free tier, fits phone latency in PH.
+**Recommendation for slice #1:** Cloudflare **Durable Objects** + **SvelteKit** on Cloudflare Pages: one vendor, good free tier, fits phone latency in PH.
 
 Alternative if team prefers Vercel-only: **PartyKit** or **Liveblocks** for rooms + Astro/Svelte host/player apps (similar to Room TBA stack).
 
@@ -113,12 +113,12 @@ Idempotency: submissions keyed by `(roundIndex, playerId)`.
 
 ## 5. First game: **Charot o Totoo**
 
-Pick one bluffing game first — minimal assets, maximum barkada energy.
+Pick one bluffing game first: minimal assets, maximum barkada energy.
 
 ### Flow
 
 1. Host selects pack (e.g. *Memes & Showbiz*, *UPLB Edition*).
-2. Each round shows a **setup** on host screen: `"Ang sabi ni ___: 'Petmalu ang luto mo!'"`  
+2. Each round shows a **setup** on host screen: `"Ang sabi ni ___: 'Petmalu ang luto mo!'"` 
 3. Phones show the same setup; one player (or all) submits the **real** completion; others submit **charot** answers.
 4. Host reveals submissions; everyone **votes** for what they think is totoo.
 5. Points: fool others with your charot, guess totoo correctly, bonus if you wrote the real answer.
@@ -155,7 +155,7 @@ Validation script in CI: no duplicates, profanity flag for family packs, max len
 
 ## 7. Phased delivery
 
-### Phase 0 — Spike (1–2 sessions)
+### Phase 0: Spike (1–2 sessions)
 
 - [ ] Durable Object (or PartyKit) echo room: join, broadcast chat, leave.
 - [ ] Single HTML host + player page with room code.
@@ -163,7 +163,7 @@ Validation script in CI: no duplicates, profanity flag for family packs, max len
 
 **Exit criteria:** 4 phones + 1 laptop stable for 10 minutes on home Wi‑Fi.
 
-### Phase 1 — Charot o Totoo MVP
+### Phase 1: Charot o Totoo MVP
 
 - [ ] `game-core` state machine + tests.
 - [ ] 30 prompts in one pack (hand-authored).
@@ -172,13 +172,13 @@ Validation script in CI: no duplicates, profanity flag for family packs, max len
 
 **Exit criteria:** Complete game with 6 players without manual refresh.
 
-### Phase 2 — Polish & second game
+### Phase 2: Polish & second game
 
 - [ ] QR join, sound-off haptics-on feedback, better reveal animations (calm, not gimmicky).
-- [ ] **Sino Yan?** categories (multiple choice buzzer — simpler than full charades).
+- [ ] **Sino Yan?** categories (multiple choice buzzer: simpler than full charades).
 - [ ] Host settings: locale, family mode, round count.
 
-### Phase 3 — Content & community
+### Phase 3: Content & community
 
 - [ ] Pack authoring doc + contributor guidelines for prompts.
 - [ ] Issue templates for pack requests (e.g. "UAAP rivalries", "Ilocano food").
@@ -190,10 +190,10 @@ Validation script in CI: no duplicates, profanity flag for family packs, max len
 
 - **UI chrome:** short English labels with Filipino subtitles optional (`Join` / `Sumali`).
 - **Prompts:** store `locale` per pack; allow `taglish` strings inline.
-- **Scoring copy:** prefer inclusive humor — roast the answer, not the person.
+- **Scoring copy:** prefer inclusive humor: roast the answer, not the person.
 - **Names:** allow Unicode nicknames; filter slurs server-side with a static denylist (expand later).
 
-Consult native speakers for **formal vs barkada** Filipino — default to informal neutral.
+Consult native speakers for **formal vs barkada** Filipino: default to informal neutral.
 
 ---
 
@@ -211,11 +211,11 @@ Consult native speakers for **formal vs barkada** Filipino — default to inform
 
 ## 10. Open questions
 
-1. **Org/home:** `uplbtools/laro-tayo` vs personal fork — affects domain (`laro.uplbtools.me`?).
-2. **Monorepo vs single app** for Phase 0 spike — lean single SvelteKit app until two games exist?
-3. **Content moderation** for user-submitted prompts — defer until Phase 3?
-4. **Monetization** — tip jar / "buy us milk tea" vs fully free forever?
-5. **Drawing games** — canvas perf on older Android; worth Phase 2 or skip?
+1. **Org/home:** `uplbtools/laro-tayo` vs personal fork: affects domain (`laro.uplbtools.me`?).
+2. **Monorepo vs single app** for Phase 0 spike: lean single SvelteKit app until two games exist?
+3. **Content moderation** for user-submitted prompts: defer until Phase 3?
+4. **Monetization**: tip jar / "buy us milk tea" vs fully free forever?
+5. **Drawing games**: canvas perf on older Android; worth Phase 2 or skip?
 
 Track decisions in GitHub issues as they settle.
 
