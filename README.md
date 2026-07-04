@@ -18,12 +18,12 @@ Most party-game apps assume Western pop culture, English-only prompts, and a pai
 ## How a session works
 
 ```text
-Host (TV/laptop)          Players (phones)
-────────────────          ────────────────
-Creates room      ──►     Enter code at laro.example/join
-Picks game pack             Pick nickname + avatar color
-Shows prompts/timer         Submit answers / draw / vote
-Reveals scores              Feel validated or roasted
+Host (TV/laptop) Players (phones)
+──────────────── ────────────────
+Creates room ──► Enter code at laro.example/join
+Picks game pack Pick nickname + avatar color
+Shows prompts/timer Submit answers / draw / vote
+Reveals scores Feel validated or roasted
 ```
 
 ## Game ideas (MVP candidates)
@@ -43,14 +43,14 @@ Order and scope are **not final**: the plan doc ranks what to prototype first.
 ```text
 laro-tayo/
 ├── apps/
-│   ├── host/          # big-screen session UI
-│   └── player/        # mobile-first join + play (may merge into one app)
+│ ├── host/ # big-screen session UI
+│ └── player/ # mobile-first join + play (may merge into one app)
 ├── packages/
-│   ├── game-core/     # shared types, scoring, round state machine
-│   ├── realtime/      # room sync (WebSocket)
-│   └── prompts/       # localized prompt packs (JSON)
+│ ├── game-core/ # shared types, scoring, round state machine
+│ ├── realtime/ # room sync (WebSocket)
+│ └── prompts/ # localized prompt packs (JSON)
 └── docs/
-    └── IMPLEMENTATION_PLAN.md
+ └── IMPLEMENTATION_PLAN.md
 ```
 
 Monorepo tooling TBD (likely **Bun workspaces** to match other UPLB Tools projects).

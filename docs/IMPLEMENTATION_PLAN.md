@@ -45,21 +45,21 @@ This document captures an initial technical and product plan for **Laro Tayo**: 
 
 ```mermaid
 flowchart LR
-  subgraph clients
-    H[Host browser]
-    P1[Player phone]
-    P2[Player phone]
-  end
-  subgraph edge
-    WS[Realtime worker]
-  end
-  subgraph data
-    R[(Redis / KV)]
-  end
-  H <-->|WebSocket| WS
-  P1 <-->|WebSocket| WS
-  P2 <-->|WebSocket| WS
-  WS <-->|room state| R
+ subgraph clients
+ H[Host browser]
+ P1[Player phone]
+ P2[Player phone]
+ end
+ subgraph edge
+ WS[Realtime worker]
+ end
+ subgraph data
+ R[(Redis / KV)]
+ end
+ H <-->|WebSocket| WS
+ P1 <-->|WebSocket| WS
+ P2 <-->|WebSocket| WS
+ WS <-->|room state| R
 ```
 
 ### Components
@@ -82,24 +82,24 @@ Alternative if team prefers Vercel-only: **PartyKit** or **Liveblocks** for room
 ## 4. Room & session model
 
 ```ts
-// Illustrative — not implemented yet
+// Illustrative: not implemented yet
 type RoomPhase = "lobby" | "starting" | "round" | "reveal" | "finished";
 
 interface Room {
-  code: string;
-  hostSecret: string; // rotate if host refreshes
-  phase: RoomPhase;
-  gameId: string | null;
-  players: Record<PlayerId, Player>;
-  roundIndex: number;
-  settings: RoomSettings;
+ code: string;
+ hostSecret: string; // rotate if host refreshes
+ phase: RoomPhase;
+ gameId: string | null;
+ players: Record<PlayerId, Player>;
+ roundIndex: number;
+ settings: RoomSettings;
 }
 
 interface RoomSettings {
-  locale: "en" | "fil" | "taglish";
-  packId: string;
-  familyMode: boolean;
-  maxPlayers: number; // default 8
+ locale: "en" | "fil" | "taglish";
+ packId: string;
+ familyMode: boolean;
+ maxPlayers: number; // default 8
 }
 ```
 
@@ -135,17 +135,17 @@ Pick one bluffing game first: minimal assets, maximum barkada energy.
 
 ```json
 {
-  "id": "memes-showbiz-v1",
-  "locale": "taglish",
-  "familyMode": true,
-  "prompts": [
-    {
-      "id": "ms-001",
-      "setup": "Finish the line from '{title}': \"{blank}\"",
-      "metadata": { "source": "Four Sisters and a Wedding", "blank": "Push mo 'yan!" },
-      "tags": ["movie", "meme"]
-    }
-  ]
+ "id": "memes-showbiz-v1",
+ "locale": "taglish",
+ "familyMode": true,
+ "prompts": [
+ {
+ "id": "ms-001",
+ "setup": "Finish the line from '{title}': \"{blank}\"",
+ "metadata": { "source": "Four Sisters and a Wedding", "blank": "Push mo 'yan!" },
+ "tags": ["movie", "meme"]
+ }
+ ]
 }
 ```
 
